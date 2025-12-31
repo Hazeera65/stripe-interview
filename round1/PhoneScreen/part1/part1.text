@@ -1,0 +1,14 @@
+problem =https://leetcode.com/discuss/post/2585038/stripe-phone-screen-senior-se-reject-by-rypom/
+The problem simulates a store's operation over a series of hours, where each hour is represented by a character in a string ('Y' for a customer visit, 'N' for no visit). The store closes at a specified hour (cost). The goal is to compute a "penalty" based on two rules:
+
+For every hour the store is open (from hour 0 up to, but not including, cost), if no customer comes ('N'), add 1 to the penalty.
+For every hour after the store is closed (from cost to the end), if a customer comes ('Y'), add 1 to the penalty.
+This penalty helps determine the best closing time to minimize unnecessary open hours (when no customers come) and avoid missing customers after closing.
+
+How the code works:
+
+It iterates through each hour in the log.
+For hours before closing, it checks for 'N' and increments the penalty.
+For hours after closing, it checks for 'Y' and increments the penalty.
+If the input is invalid (log too short or cost == -1), it returns -1.
+This approach helps analyze store efficiency and customer service based on visit patterns.
