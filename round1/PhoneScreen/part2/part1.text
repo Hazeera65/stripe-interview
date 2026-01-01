@@ -1,0 +1,20 @@
+You are given a string (e.g., "YNNYYN") representing customer visits to a shop, where:
+
+'Y' means a customer comes at that hour.
+'N' means no customer comes at that hour.
+You can close the shop at any hour (from 0 to n, where n is the length of the string). The penalty is calculated as:
+
+For every hour the shop is open and no customer comes ('N'), penalty +1.
+For every hour the shop is closed and a customer comes ('Y'), penalty +1.
+Your goal:
+Find the earliest hour to close the shop so that the penalty is minimized.
+
+Example:
+Input: "YYNY"
+
+Closing at hour 0: Penalty = 3
+Closing at hour 1: Penalty = 2
+Closing at hour 2: Penalty = 1
+Closing at hour 3: Penalty = 2
+Closing at hour 4: Penalty = 1
+Earliest minimum penalty is at hour 2.

@@ -1,0 +1,46 @@
+Problem Explanation
+You are given a string (or blocks) representing customer visits to a shop, where:
+
+'Y' means a customer comes at that hour.
+'N' means no customer comes at that hour.
+You can close the shop at any hour (from 0 to n, where n is the length of the string).
+Penalty calculation:
+
+For every hour the shop is open and no customer comes ('N' before closing), penalty +1.
+For every hour the shop is closed and a customer comes ('Y' after closing), penalty +1.
+Goal:
+Find the earliest hour to close the shop so that the penalty is minimized.
+
+Solution Approach
+1. Handling "BEGIN ... END" Blocks
+The input may contain nested or multiple "BEGIN" and "END" blocks.
+The code splits the input by spaces into tokens.
+It uses a stack to track the indices of "BEGIN".
+When an "END" is found, it pops the last "BEGIN" index, concatenates all tokens between them (excluding "BEGIN" and "END"), and computes the penalty for that block using the penaltytime function.
+The penalty for each block is added to the result list.
+2. Handling Plain 'Y'/'N' Input
+If there are no "BEGIN"/"END" blocks and the input is just a string of 'Y' and 'N', the code computes the penalty for the whole string.
+3. Penalty Calculation (penaltytime function)
+Counts the total number of 'Y' (customers) in the string.
+Iterates through each possible closing hour:
+If the current character is 'Y', decrement the count of open customers (since they are now before closing).
+If the current character is 'N', increment the penalty (since the shop was open but no customer came).
+Keeps track of the minimum penalty and the earliest hour it occurs.
+Returns the earliest hour with the minimum penalty.
+Why This Approach Works
+Stack for Nested Blocks:
+The stack allows handling of nested "BEGIN"/"END" blocks, so the code can process each block independently and in the correct order.
+Efficient Penalty Calculation:
+The penalty calculation is linear in the length of the string/block, making it efficient even for large inputs.
+Flexible Input:
+The code works for both plain 'Y'/'N' strings and for complex, nested block structures.
+Example
+For input:
+
+The innermost block is "Y Y N Y" → penalty is 2.
+The next block is "BEGIN Y Y N Y END Y Y N N" → penalty is 0.
+Output:
+
+Summary:
+This approach efficiently finds the minimum penalty closing hour for both simple and nested input formats, using a stack for block parsing and a linear scan for penalty calculation.
+
