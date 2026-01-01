@@ -1,0 +1,151 @@
+https://algo.monster/liteproblems/465
+1. What the Problem Is Asking (In Simple Terms)
+
+You are given a list of money transfers between people.
+
+Each transfer says:
+
+Person A paid Person B some amount
+
+
+After all transfers:
+
+Some people owe money (net negative balance)
+
+Some people are owed money (net positive balance)
+
+Your goal is:
+
+Settle all debts using the minimum number of new transactions, so that everyone’s final balance becomes 0.
+
+2. Important Clarification (Very Common Confusion)
+
+You are NOT asked to replay the original transactions.
+
+You are allowed to:
+
+Create new transactions
+
+Between any people
+
+For any amounts
+
+As long as:
+
+Everyone ends up with balance 0
+
+Number of new transactions is minimum
+
+3. How to Think About Balances
+Step 1: Convert transactions → net balances
+
+For each transaction [from, to, amount]:
+
+from loses amount → -amount
+
+to gains amount → +amount
+
+Example:
+
+[0,1,10]
+
+
+Balances:
+
+0 → -10 (owes)
+1 → +10 (is owed)
+
+4. Who Needs to Pay Whom?
+
+People with negative balance must pay
+
+People with positive balance must receive
+
+Total sum of balances is always 0
+
+This becomes a matching problem:
+
+Match debtors to creditors optimally.
+
+5. Why Is This Problem Hard?
+Greedy does NOT always work
+
+Example:
+
+Balances: [-5, -5, +10]
+
+
+You might think:
+
+-5 → +10
+-5 → +10
+
+
+That’s 2 transactions.
+
+But sometimes different groupings reduce transactions when there are many people.
+
+6. Key Insight (Core of the Problem)
+
+We only care about non-zero balances
+The order of payments does NOT matter
+We want to cancel balances in groups with as few transactions as possible
+
+7. Simple Example Walkthrough
+Input
+[[0,1,10],[2,0,5]]
+
+Step 1: Net balances
+0: -5
+1: +10
+2: -5
+
+Step 2: Settlement
+0 → 1 (5)
+2 → 1 (5)
+
+Answer
+2 transactions
+
+8. Why DFS / Backtracking Is Used
+
+Each person with debt can pay any creditor
+
+Multiple combinations exist
+
+We must try combinations and choose the minimum
+
+This is why solutions use:
+
+DFS
+
+Backtracking
+
+Bitmask DP (optimized)
+
+9. What the Output Represents
+
+The output is:
+
+Minimum number of new transactions required
+
+
+Not the transaction list.
+
+10. Constraints That Matter
+
+Number of people ≤ 20 (important)
+
+Allows exponential / bitmask solutions
+
+Balance values can be large
+
+11. One-Line Summary
+
+Convert transactions to balances, then minimize the number of transfers needed to cancel all non-zero balances.
+
+12. Mental Model (Very Important)
+
+Think of it as:
+
+“How many edges are needed to connect debtors to creditors so that all weights cancel out?”

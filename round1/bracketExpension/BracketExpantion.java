@@ -45,7 +45,7 @@ public static void checking(String u, ArrayList<String> y, int index, StringBuil
             System.out.println(k.get(i));
         }
     }
-    
+}
 // }
 // Basic Single Expansion
 // Input
